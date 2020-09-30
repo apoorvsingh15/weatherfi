@@ -17,7 +17,7 @@ const WeatherCard = () => {
 const styles = StyleSheet.create({
   card: {
     backgroundColor: CARD_COLOR,
-    height: windowHeight * 0.2,
+    height: windowHeight * 0.22,
     borderRadius: 20,
     // shadow of card - https://ethercreative.github.io/react-native-shadow-generator/
     shadowColor: '#000',
