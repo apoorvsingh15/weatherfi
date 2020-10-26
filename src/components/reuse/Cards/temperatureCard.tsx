@@ -1,23 +1,26 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {windowHeight} from '../../../utils/dimensions';
+import isEmpty from 'lodash/isEmpty';
 
-const TemperatureCard = () => {
-  return (
+const TemperatureCard = ({weather}: any) => {
+  return !isEmpty(weather) ? (
     <View style={styles.card}>
       <View>
         <Text style={styles.headerText}>Wind</Text>
-        <Text style={styles.normalText}>33 m/h</Text>
+        <Text style={styles.normalText}>{weather.wind.speed}</Text>
       </View>
       <View>
         <Text style={styles.headerText}>Humidity</Text>
-        <Text style={styles.normalText}>23 km</Text>
+        <Text style={styles.normalText}>{weather.main.humidity}</Text>
       </View>
       <View>
         <Text style={styles.headerText}>Visibility</Text>
-        <Text style={styles.normalText}>64%</Text>
+        <Text style={styles.normalText}>{weather.visibility}</Text>
       </View>
     </View>
+  ) : (
+    <View />
   );
 };
 

@@ -2,26 +2,34 @@ import React from 'react';
 import {Text, View, StyleSheet, Image} from 'react-native';
 import {CARD_COLOR} from '../../../utils/config';
 import {windowHeight} from '../../../utils/dimensions';
-
-const WeatherCard = () => {
-  return (
+import {convertKelvinToCelcius} from '../../../utils/helpers';
+import isEmpty from 'lodash/isEmpty';
+const WeatherCard = ({weather}: any) => {
+  console.log(weather, '<+=weather');
+  return !isEmpty(weather) ? (
     <View style={styles.card}>
       <View>
         <Image
-          source={require('../../../assets/cloud.png')}
+          source={{
+            uri: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`,
+          }}
           style={styles.image}
         />
-        <Text style={styles.weatherText}>Heavy Rain</Text>
-        <Text style={styles.dayTimeText}>Morning</Text>
+        <Text style={styles.weatherText}>{weather.weather[0].main}</Text>
+        <Text style={styles.dayTimeText}>{weather.name}</Text>
       </View>
       <View>
         <Text style={styles.headerFont}>
-          29
+          {Math.round(convertKelvinToCelcius(weather.main.temp))}
           <Text style={styles.degreeFont}>C</Text>
         </Text>
-        <Text style={styles.subHeadingText}>Feels like 30</Text>
+        <Text style={styles.subHeadingText}>{`Feels like ${Math.round(
+          convertKelvinToCelcius(weather.main.feels_like),
+        )}`}</Text>
       </View>
     </View>
+  ) : (
+    <View />
   );
 };
 
